@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace ConsumingHolidaysAPI
 {
@@ -22,6 +23,9 @@ namespace ConsumingHolidaysAPI
         {
             services.AddControllersWithViews();
             services.AddSingleton<IHolidaysAPIService, HolidaysAPIService>();
+
+            //Hay que registrar el objeto HttpClient así:
+            services.AddHttpClient("PublicHolidaysAPI", c => c.BaseAddress = new Uri("https://date.nager.at"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
